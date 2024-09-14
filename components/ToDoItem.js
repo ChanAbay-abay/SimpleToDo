@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text } from "react-native";
-import styles from "./ToDoItemStyles"; // Import styles from ToDoItemStyles.js
+import styles from "./ToDoItemStyles";
 
-const ToDoItem = ({ title }) => {
+const ToDoItem = ({ title, desc, due }) => {
   return (
     <View style={styles.taskContainer}>
       <View style={styles.checkbox}>
@@ -10,8 +10,8 @@ const ToDoItem = ({ title }) => {
       </View>
       <View style={styles.taskContent}>
         <Text style={styles.taskTitle}>{title}</Text>
-        <Text style={styles.taskDesc}>task desc</Text>
-        <Text style={styles.dateDue}>date due</Text>
+        <Text style={styles.taskDesc}>{desc}</Text>
+        <Text style={styles.dateDue}>{due}</Text>
       </View>
     </View>
   );

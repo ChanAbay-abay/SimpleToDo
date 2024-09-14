@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import Theme from "./Theme"; // Import theme
+import Theme from "./Theme";
 
-const currentTheme = Theme.dark; // Set to dark mode by default
+const currentTheme = Theme.dark;
 
 const styles = StyleSheet.create({
   maincontainer: {
