@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     color: "orange",
     marginBottom: 10,
   },
+  subtitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "orange",
+    marginVertical: 10,
+  },
   text: {
     color: currentTheme.textColor,
     fontSize: 18,

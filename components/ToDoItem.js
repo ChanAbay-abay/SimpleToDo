@@ -1,17 +1,26 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./ToDoItemStyles";
 
-const ToDoItem = ({ title, desc, due }) => {
+const ToDoItem = ({ id, title, desc, due, completed, onToggleComplete }) => {
   return (
-    <View style={styles.taskContainer}>
-      <View style={styles.checkbox}>
-        <Text>checkbox here</Text>
-      </View>
+    <View style={[styles.taskContainer, completed && styles.completed]}>
+      <TouchableOpacity
+        style={styles.checkbox}
+        onPress={() => onToggleComplete(id)}
+      >
+        <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
+      </TouchableOpacity>
       <View style={styles.taskContent}>
-        <Text style={styles.taskTitle}>{title}</Text>
-        <Text style={styles.taskDesc}>{desc}</Text>
-        <Text style={styles.dateDue}>{due}</Text>
+        <Text style={[styles.taskTitle, completed && styles.completedText]}>
+          {title}
+        </Text>
+        <Text style={[styles.taskDesc, completed && styles.completedText]}>
+          {desc}
+        </Text>
+        <Text style={[styles.dateDue, completed && styles.completedText]}>
+          {due}
+        </Text>
       </View>
     </View>
   );

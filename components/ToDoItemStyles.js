@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  checkboxText: {
+    color: "white",
+    fontSize: 18,
+  },
   taskContent: {
     flex: 1,
     marginLeft: 15,
@@ -32,6 +36,14 @@ const styles = StyleSheet.create({
   dateDue: {
     color: currentTheme.textColor,
     fontSize: 14,
+  },
+  completed: {
+    backgroundColor: "#f0f0f0",
+    borderColor: "#d0d0d0",
+  },
+  completedText: {
+    color: "#a0a0a0",
+    textDecorationLine: "line-through",
   },
 });
 
