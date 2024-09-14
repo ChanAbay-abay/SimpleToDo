@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { SafeAreaView, StatusBar, FlatList, View, Text } from "react-native";
+import {
+  SafeAreaView,
+  StatusBar,
+  FlatList,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import styles from "./AppStyles";
 import ToDoItem from "./components/ToDoItem";
 
@@ -36,6 +43,18 @@ export default function App() {
         item.id === id ? { ...item, completed: !item.completed } : item
       )
     );
+  };
+
+  const addNewTask = () => {
+    const maxId = Math.max(...toDoData.map((item) => parseInt(item.id, 10)));
+    const newTask = {
+      id: (maxId + 1).toString(),
+      title: "New Task",
+      desc: "Task description",
+      due: new Date().toISOString().split("T")[0], // today's date
+      completed: false,
+    };
+    setToDoData([...toDoData, newTask]);
   };
 
   // Split tasks into incomplete and completed
@@ -85,6 +104,9 @@ export default function App() {
           keyExtractor={(item) => item.id}
         />
       </View>
+      <TouchableOpacity style={styles.addButton} onPress={addNewTask}>
+        <Text style={styles.addButtonText}>New Task</Text>
+      </TouchableOpacity>
       <StatusBar style="light" />
     </SafeAreaView>
   );
