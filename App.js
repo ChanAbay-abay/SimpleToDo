@@ -1,20 +1,27 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { SafeAreaView, StatusBar, FlatList, View, Text } from "react-native";
+import styles from "./AppStyles"; // Import styles from AppStyles.js
+import ToDoItem from "./components/ToDoItem"; // Import ToDoItem component
+
+const toDoData = [
+  { id: "1", title: "Buy groceries" },
+  { id: "2", title: "Walk the dog" },
+  { id: "3", title: "Do laundry" },
+  // Add more to-do items here
+];
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.maincontainer}>
+      <View style={styles.wrappercontainer}>
+        <Text style={styles.title}>Simple To Do</Text>
+        <FlatList
+          data={toDoData}
+          renderItem={({ item }) => <ToDoItem title={item.title} />}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
+      <StatusBar style="light" />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
