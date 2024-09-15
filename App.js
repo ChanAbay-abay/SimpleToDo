@@ -88,7 +88,7 @@ export default function App() {
             />
           )}
           keyExtractor={(item) => item.id}
-        />
+        />  
         <Text style={styles.subtitle}>Completed Tasks</Text>
         <FlatList
           data={sortedCompletedTasks}
