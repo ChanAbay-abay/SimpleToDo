@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
   maincontainer: {
     flex: 1,
     backgroundColor: currentTheme.backgroundColor,
-    padding: 16,
+    paddingTop: 24,
+    paddingHorizontal: 16,
   },
   wrappercontainer: {
     marginHorizontal: 15,
@@ -22,8 +23,8 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 24,
-    fontWeight: "800",
-    color: "orange",
+    fontWeight: "500",
+    color: "white",
     marginVertical: 10,
   },
   text: {
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     right: 20,
     backgroundColor: "orange",
     padding: 10,
-    borderRadius: 16,
+    borderRadius: 12,
     zIndex: 1, // Ensure the button is on top of other content
   },
   addButtonText: {

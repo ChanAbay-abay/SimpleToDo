@@ -9,10 +9,11 @@ const styles = StyleSheet.create({
     backgroundColor: currentTheme.backgroundColor,
     borderWidth: 1,
     // borderColor: currentTheme.textColor, //temp
-    borderColor: "orange",
+    borderColor: "white",
     flexDirection: "row",
     borderRadius: 16,
     marginBottom: 8,
+    alignItems: "center",
   },
   checkbox: {
     width: 24,
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 16,
-    marginTop: 4,
+    // marginTop: 4,
   },
   checkboxText: {
     color: "#d0d0d0",
@@ -38,10 +39,12 @@ const styles = StyleSheet.create({
     color: currentTheme.textColor,
     fontSize: 18,
     fontWeight: "500",
+    flexWrap: 'wrap',
   },
   taskDesc: {
     fontSize: 14,
     color: currentTheme.textColor,
+    flexWrap: 'wrap',
   },
   dateDue: {
     color: currentTheme.textColor,
