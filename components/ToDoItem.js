@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import styles from "./ToDoItemStyles";
+import styles from "./toDoItemStyles";
 
 const ToDoItem = ({ id, title, desc, due, completed, onToggleComplete }) => {
   return (

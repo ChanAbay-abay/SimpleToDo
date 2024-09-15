@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
   },
   wrappercontainer: {
     marginHorizontal: 15,
-    marginBottom: 70, // Ensure space for the button
-    flex: 1, // Ensures that the wrapper container takes up available space
+    marginBottom: 70,
+    flex: 1,
   },
   title: {
     fontSize: 30,
@@ -31,6 +31,41 @@ const styles = StyleSheet.create({
     color: currentTheme.textColor,
     fontSize: 18,
   },
+  // Styles for the NewTask component
+  taskContainer: {
+    backgroundColor: currentTheme.backgroundColorSecondary,
+    padding: 10,
+    borderRadius: 8,
+    marginVertical: 10,
+  },
+  taskContent: {
+    marginBottom: 10,
+  },
+  taskTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: currentTheme.textColor,
+    marginBottom: 5,
+  },
+  taskDesc: {
+    fontSize: 14,
+    color: currentTheme.textSecondaryColor,
+    marginBottom: 5,
+  },
+  dateDue: {
+    fontSize: 14,
+    color: currentTheme.textSecondaryColor,
+  },
+  checkbox: {
+    backgroundColor: currentTheme.buttonColor,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  checkboxText: {
+    color: currentTheme.buttonTextColor,
+    fontWeight: "bold",
+  },
   addButton: {
     position: "absolute",
     bottom: 20,
@@ -38,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
     padding: 10,
     borderRadius: 12,
-    zIndex: 1, // Ensure the button is on top of other content
+    zIndex: 1,
   },
   addButtonText: {
     color: "white",
