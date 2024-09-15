@@ -1,84 +1,41 @@
 import { StyleSheet } from "react-native";
-import Theme from "./Theme";
-
-const currentTheme = Theme.dark;
 
 const styles = StyleSheet.create({
   maincontainer: {
     flex: 1,
-    backgroundColor: currentTheme.backgroundColor,
-    paddingTop: 24,
-    paddingHorizontal: 16,
+    backgroundColor: "#121212",
+    paddingTop: 20,
   },
   wrappercontainer: {
-    marginHorizontal: 15,
-    marginBottom: 70,
+    padding: 20,
     flex: 1,
   },
   title: {
     fontSize: 30,
-    fontWeight: "900",
-    color: "orange",
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
     marginBottom: 10,
   },
   subtitle: {
-    fontSize: 24,
-    fontWeight: "500",
-    color: "white",
-    marginVertical: 10,
-  },
-  text: {
-    color: currentTheme.textColor,
     fontSize: 18,
-  },
-  // Styles for the NewTask component
-  taskContainer: {
-    backgroundColor: currentTheme.backgroundColorSecondary,
-    padding: 10,
-    borderRadius: 8,
+    color: "#bbb",
     marginVertical: 10,
-  },
-  taskContent: {
-    marginBottom: 10,
-  },
-  taskTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: currentTheme.textColor,
-    marginBottom: 5,
-  },
-  taskDesc: {
-    fontSize: 14,
-    color: currentTheme.textSecondaryColor,
-    marginBottom: 5,
-  },
-  dateDue: {
-    fontSize: 14,
-    color: currentTheme.textSecondaryColor,
-  },
-  checkbox: {
-    backgroundColor: currentTheme.buttonColor,
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  checkboxText: {
-    color: currentTheme.buttonTextColor,
-    fontWeight: "bold",
   },
   addButton: {
+    backgroundColor: "#1e90ff",
+    borderRadius: 30,
+    height: 60,
+    width: 60,
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
-    bottom: 20,
-    right: 20,
-    backgroundColor: "orange",
-    padding: 10,
-    borderRadius: 12,
-    zIndex: 1,
+    bottom: 30,
+    right: 30,
   },
   addButtonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "900",
+    color: "#fff",
+    fontSize: 24,
   },
 });
 

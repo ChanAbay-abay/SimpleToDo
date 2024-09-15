@@ -6,7 +6,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Modal,
 } from "react-native";
 import styles from "./AppStyles";
 import ToDoItem from "./components/toDoItem";
@@ -39,7 +38,8 @@ const initialToDoData = [
 
 export default function App() {
   const [toDoData, setToDoData] = useState(initialToDoData);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [showNewTask, setShowNewTask] = useState(false);
+  const [editingTaskId, setEditingTaskId] = useState(null);
 
   const toggleComplete = (id) => {
     setToDoData((prevData) =>
@@ -57,14 +57,19 @@ export default function App() {
       completed: false,
     };
     setToDoData([...toDoData, taskToAdd]);
-    setModalVisible(false);
+    setShowNewTask(false);
   };
 
-  // Split tasks into incomplete and completed
+  const editTask = (updatedTask) => {
+    setToDoData((prevData) =>
+      prevData.map((item) => (item.id === updatedTask.id ? updatedTask : item))
+    );
+    setEditingTaskId(null);
+  };
+
   const incompleteTasks = toDoData.filter((task) => !task.completed);
   const completedTasks = toDoData.filter((task) => task.completed);
 
-  // Sort tasks by ID to maintain original order
   const sortedIncompleteTasks = incompleteTasks.sort((a, b) =>
     a.id.localeCompare(b.id)
   );
@@ -72,25 +77,51 @@ export default function App() {
     a.id.localeCompare(b.id)
   );
 
+  const displayedTasks = [...sortedIncompleteTasks];
+  if (showNewTask) {
+    displayedTasks.push({
+      id: "new-task",
+      title: "Add New Task",
+      desc: "",
+      due: "",
+    });
+  }
+
   return (
     <SafeAreaView style={styles.maincontainer}>
       <View style={styles.wrappercontainer}>
         <Text style={styles.title}>Simple To Do</Text>
         <Text style={styles.subtitle}>Incomplete Tasks</Text>
         <FlatList
-          data={sortedIncompleteTasks}
-          renderItem={({ item }) => (
-            <ToDoItem
-              id={item.id}
-              title={item.title}
-              desc={item.desc}
-              due={item.due}
-              completed={item.completed}
-              onToggleComplete={toggleComplete}
-            />
-          )}
+          data={displayedTasks}
+          renderItem={({ item }) => {
+            if (item.id === "new-task") {
+              return <NewTask onSave={addNewTask} />;
+            }
+            if (item.id === editingTaskId) {
+              return (
+                <EditTask
+                  task={item}
+                  onSave={editTask}
+                  onCancel={() => setEditingTaskId(null)}
+                />
+              );
+            }
+            return (
+              <ToDoItem
+                id={item.id}
+                title={item.title}
+                desc={item.desc}
+                due={item.due}
+                completed={item.completed}
+                onToggleComplete={toggleComplete}
+                onEdit={() => setEditingTaskId(item.id)}
+              />
+            );
+          }}
           keyExtractor={(item) => item.id}
         />
+
         <Text style={styles.subtitle}>Completed Tasks</Text>
         <FlatList
           data={sortedCompletedTasks}
@@ -107,12 +138,14 @@ export default function App() {
           keyExtractor={(item) => item.id}
         />
       </View>
+
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => setModalVisible(true)}
+        onPress={() => setShowNewTask(!showNewTask)}
       >
-        <Text style={styles.addButtonText}>New Task</Text>
+        <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
+
       <StatusBar style="light" />
     </SafeAreaView>
   );

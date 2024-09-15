@@ -12,25 +12,30 @@ const ToDoItem = ({
   onEdit,
 }) => {
   return (
-    <View style={[styles.taskContainer, completed && styles.completed]}>
+    <TouchableOpacity
+      style={[styles.taskContainer, completed && styles.completed]}
+      onPress={() => onEdit(id)}
+    >
       <TouchableOpacity
         style={styles.checkbox}
         onPress={() => onToggleComplete(id)}
       >
         <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.taskContent} onPress={() => onEdit(id)}>
-        <Text style={[styles.taskTitle, completed && styles.completedText]}>
+      <View style={styles.taskContent}>
+        <Text
+          style={[styles.taskTitle, completed && styles.completedTaskTitle]}
+        >
           {title}
         </Text>
-        <Text style={[styles.taskDesc, completed && styles.completedText]}>
+        <Text style={[styles.taskDesc, completed && styles.completedTaskDesc]}>
           {desc}
         </Text>
-        <Text style={[styles.dateDue, completed && styles.completedText]}>
-          {due}
+        <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
+          Due: {due}
         </Text>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
