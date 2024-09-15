@@ -59,7 +59,10 @@ const EditTask = ({ task, onSave, onCancel, onDelete }) => {
       </TouchableOpacity>
 
       {/* Delete button */}
-      <TouchableOpacity style={styles.actionButton} onPress={onDelete}>
+      <TouchableOpacity
+        style={styles.actionButton}
+        onPress={() => onDelete(task.id)}
+      >
         <Ionicons name="trash-bin" size={28} color="darkred" />
       </TouchableOpacity>
     </View>
