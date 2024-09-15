@@ -72,6 +72,10 @@ export default function App() {
     setEditingTaskId(null);
   };
 
+  const handleNewTaskCancel = () => {
+    setShowNewTask(false);
+  };
+
   const incompleteTasks = toDoData.filter((task) => !task.completed);
   const completedTasks = toDoData.filter((task) => task.completed);
 
@@ -101,7 +105,9 @@ export default function App() {
           data={displayedTasks}
           renderItem={({ item }) => {
             if (item.id === "new-task") {
-              return <NewTask onSave={addNewTask} />;
+              return (
+                <NewTask onSave={addNewTask} onCancel={handleNewTaskCancel} />
+              );
             }
             if (item.id === editingTaskId) {
               return (
