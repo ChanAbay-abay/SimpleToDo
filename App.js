@@ -38,8 +38,7 @@ const initialToDoData = [
 
 export default function App() {
   const [toDoData, setToDoData] = useState(initialToDoData);
-  const [showNewTask, setShowNewTask] = useState(false);
-  const [editingTask, setEditingTask] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const toggleComplete = (id) => {
     setToDoData((prevData) =>
@@ -57,19 +56,14 @@ export default function App() {
       completed: false,
     };
     setToDoData([...toDoData, taskToAdd]);
-    setShowNewTask(false);
+    setModalVisible(false);
   };
 
-  const editTask = (updatedTask) => {
-    setToDoData((prevData) =>
-      prevData.map((item) => (item.id === updatedTask.id ? updatedTask : item))
-    );
-    setEditingTask(null);
-  };
-
+  // Split tasks into incomplete and completed
   const incompleteTasks = toDoData.filter((task) => !task.completed);
   const completedTasks = toDoData.filter((task) => task.completed);
 
+  // Sort tasks by ID to maintain original order
   const sortedIncompleteTasks = incompleteTasks.sort((a, b) =>
     a.id.localeCompare(b.id)
   );
@@ -77,53 +71,25 @@ export default function App() {
     a.id.localeCompare(b.id)
   );
 
-  const displayedTasks = [...sortedIncompleteTasks];
-  if (showNewTask) {
-    displayedTasks.push({
-      id: "new-task",
-      title: "Add New Task",
-      desc: "",
-      due: "",
-    });
-  }
-
   return (
     <SafeAreaView style={styles.maincontainer}>
       <View style={styles.wrappercontainer}>
         <Text style={styles.title}>Simple To Do</Text>
         <Text style={styles.subtitle}>Incomplete Tasks</Text>
         <FlatList
-          data={displayedTasks}
-          renderItem={({ item }) => {
-            if (item.id === "new-task") {
-              return <NewTask onSave={addNewTask} />;
-            }
-            if (editingTask && editingTask.id === item.id) {
-              return (
-                <EditTask
-                  task={editingTask}
-                  onSave={editTask}
-                  onCancel={() => setEditingTask(null)}
-                />
-              );
-            }
-            return (
-              <ToDoItem
-                id={item.id}
-                title={item.title}
-                desc={item.desc}
-                due={item.due}
-                completed={item.completed}
-                onToggleComplete={toggleComplete}
-                onEdit={(id) =>
-                  setEditingTask(toDoData.find((task) => task.id === id))
-                }
-              />
-            );
-          }}
+          data={sortedIncompleteTasks}
+          renderItem={({ item }) => (
+            <ToDoItem
+              id={item.id}
+              title={item.title}
+              desc={item.desc}
+              due={item.due}
+              completed={item.completed}
+              onToggleComplete={toggleComplete}
+            />
+          )}
           keyExtractor={(item) => item.id}
-        />
-
+        />  
         <Text style={styles.subtitle}>Completed Tasks</Text>
         <FlatList
           data={sortedCompletedTasks}
@@ -135,23 +101,22 @@ export default function App() {
               due={item.due}
               completed={item.completed}
               onToggleComplete={toggleComplete}
-              onEdit={(id) =>
-                setEditingTask(toDoData.find((task) => task.id === id))
-              }
             />
           )}
           keyExtractor={(item) => item.id}
         />
       </View>
-
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => setShowNewTask(!showNewTask)}
-      >
-        <Text style={styles.addButtonText}>+</Text>
+      <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
+        <Text style={styles.addButtonText}>New Task</Text>
       </TouchableOpacity>
-
       <StatusBar style="light" />
+
+      <TaskModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onSave={addNewTask}
+      />
+
     </SafeAreaView>
   );
 }
