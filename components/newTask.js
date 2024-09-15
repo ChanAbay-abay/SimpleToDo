@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import styles from "./toDoItemStyles"; // Reuse the ToDoItem styles
+import styles from "./toDoItemStyles";
 
 const NewTask = ({ onSave }) => {
   const [title, setTitle] = useState("");
@@ -8,14 +8,16 @@ const NewTask = ({ onSave }) => {
   const [due, setDue] = useState("");
 
   const handleSave = () => {
-    const newTask = { title, desc, due }; // Create task object with potentially empty fields
-    if (onSave) {
-      onSave(newTask); // Pass new task to App.js
+    const taskTitle = title.trim() === "" ? "New Reminder" : title;
+    if (taskTitle || desc || due) {
+      const newTask = { title: taskTitle, desc, due };
+      if (onSave) {
+        onSave(newTask);
+      }
+      setTitle("");
+      setDesc("");
+      setDue("");
     }
-    // Clear the fields after saving
-    setTitle("");
-    setDesc("");
-    setDue("");
   };
 
   return (
@@ -44,10 +46,18 @@ const NewTask = ({ onSave }) => {
         />
       </View>
       <TouchableOpacity
-        style={styles.checkbox} // Keep the style as it was
+        style={styles.checkbox}
         onPress={handleSave}
+        disabled={!title && !desc && !due}
       >
-        <Text style={styles.checkboxText}>Add Task</Text>
+        <Text
+          style={[
+            styles.checkboxText,
+            { color: !title && !desc && !due ? "#a0a0a0" : "white" },
+          ]}
+        >
+          Add Task
+        </Text>
       </TouchableOpacity>
     </View>
   );
