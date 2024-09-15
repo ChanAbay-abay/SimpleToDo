@@ -23,15 +23,13 @@ const ToDoItem = ({
         <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
       </TouchableOpacity>
       <View style={styles.taskContent}>
-        <Text
-          style={[styles.taskTitle, completed && styles.completedTaskTitle]}
-        >
+        <Text style={[styles.taskTitle, completed && styles.completedText]}>
           {title}
         </Text>
-        <Text style={[styles.taskDesc, completed && styles.completedTaskDesc]}>
+        <Text style={[styles.taskDesc, completed && styles.completedText]}>
           {desc}
         </Text>
-        <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
+        <Text style={[styles.dateDue, completed && styles.completedText]}>
           Due: {due}
         </Text>
       </View>
