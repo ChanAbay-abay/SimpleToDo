@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./AppStyles";
-import ToDoItem from "./components/ToDoItem";
+import ToDoItem from "./components/toDoItem";
 import NewTask from "./components/newTask";
 import EditTask from "./components/editTask";
 
