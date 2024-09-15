@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./AppStyles";
-import ToDoItem from "./components/toDoItem";
+import ToDoItem from "./components/ToDoItem";
 import NewTask from "./components/newTask";
+import EditTask from "./components/editTask";
 
 const initialToDoData = [
   {
@@ -37,7 +38,8 @@ const initialToDoData = [
 
 export default function App() {
   const [toDoData, setToDoData] = useState(initialToDoData);
-  const [showNewTask, setShowNewTask] = useState(false); // Control visibility of the NewTask form
+  const [showNewTask, setShowNewTask] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
 
   const toggleComplete = (id) => {
     setToDoData((prevData) =>
@@ -56,6 +58,13 @@ export default function App() {
     };
     setToDoData([...toDoData, taskToAdd]);
     setShowNewTask(false);
+  };
+
+  const editTask = (updatedTask) => {
+    setToDoData((prevData) =>
+      prevData.map((item) => (item.id === updatedTask.id ? updatedTask : item))
+    );
+    setEditingTask(null);
   };
 
   const incompleteTasks = toDoData.filter((task) => !task.completed);
@@ -89,6 +98,15 @@ export default function App() {
             if (item.id === "new-task") {
               return <NewTask onSave={addNewTask} />;
             }
+            if (editingTask && editingTask.id === item.id) {
+              return (
+                <EditTask
+                  task={editingTask}
+                  onSave={editTask}
+                  onCancel={() => setEditingTask(null)}
+                />
+              );
+            }
             return (
               <ToDoItem
                 id={item.id}
@@ -97,6 +115,9 @@ export default function App() {
                 due={item.due}
                 completed={item.completed}
                 onToggleComplete={toggleComplete}
+                onEdit={(id) =>
+                  setEditingTask(toDoData.find((task) => task.id === id))
+                }
               />
             );
           }}
@@ -114,6 +135,9 @@ export default function App() {
               due={item.due}
               completed={item.completed}
               onToggleComplete={toggleComplete}
+              onEdit={(id) =>
+                setEditingTask(toDoData.find((task) => task.id === id))
+              }
             />
           )}
           keyExtractor={(item) => item.id}
@@ -122,7 +146,7 @@ export default function App() {
 
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => setShowNewTask(!showNewTask)} // Toggle NewTask form visibility
+        onPress={() => setShowNewTask(!showNewTask)}
       >
         <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
