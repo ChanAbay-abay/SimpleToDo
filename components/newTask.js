@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import styles from "./toDoItemStyles"; // Reuse the ToDoItem styles
+import styles from "./toDoItemStyles";
 
 const NewTask = ({ onSave }) => {
   const [title, setTitle] = useState("");
@@ -8,9 +8,12 @@ const NewTask = ({ onSave }) => {
   const [due, setDue] = useState("");
 
   const handleSave = () => {
-    if (title && desc && due) {
-      const newTask = { title, desc, due };
-      onSave(newTask);
+    const taskTitle = title.trim() === "" ? "New Reminder" : title;
+    if (taskTitle || desc || due) {
+      const newTask = { title: taskTitle, desc, due };
+      if (onSave) {
+        onSave(newTask);
+      }
       setTitle("");
       setDesc("");
       setDue("");
@@ -42,8 +45,19 @@ const NewTask = ({ onSave }) => {
           onChangeText={setDue}
         />
       </View>
-      <TouchableOpacity style={styles.checkbox} onPress={handleSave}>
-        <Text style={styles.checkboxText}>Add Task</Text>
+      <TouchableOpacity
+        style={styles.checkbox}
+        onPress={handleSave}
+        disabled={!title && !desc && !due}
+      >
+        <Text
+          style={[
+            styles.checkboxText,
+            { color: !title && !desc && !due ? "#a0a0a0" : "white" },
+          ]}
+        >
+          Add Task
+        </Text>
       </TouchableOpacity>
     </View>
   );
