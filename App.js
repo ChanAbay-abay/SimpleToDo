@@ -89,7 +89,7 @@ export default function App() {
             />
           )}
           keyExtractor={(item) => item.id}
-        />  
+        />
         <Text style={styles.subtitle}>Completed Tasks</Text>
         <FlatList
           data={sortedCompletedTasks}
@@ -106,17 +106,13 @@ export default function App() {
           keyExtractor={(item) => item.id}
         />
       </View>
-      <TouchableOpacity style={styles.addButton} onPress={() => setModalVisible(true)}>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => setModalVisible(true)}
+      >
         <Text style={styles.addButtonText}>New Task</Text>
       </TouchableOpacity>
       <StatusBar style="light" />
-
-      <TaskModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onSave={addNewTask}
-      />
-
     </SafeAreaView>
   );
 }
