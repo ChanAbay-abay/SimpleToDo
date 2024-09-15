@@ -67,6 +67,11 @@ export default function App() {
     setEditingTaskId(null);
   };
 
+  const deleteTask = (id) => {
+    setToDoData((prevData) => prevData.filter((item) => item.id !== id));
+    setEditingTaskId(null);
+  };
+
   const incompleteTasks = toDoData.filter((task) => !task.completed);
   const completedTasks = toDoData.filter((task) => task.completed);
 
@@ -104,6 +109,7 @@ export default function App() {
                   task={item}
                   onSave={editTask}
                   onCancel={() => setEditingTaskId(null)}
+                  onDelete={deleteTask}
                 />
               );
             }
