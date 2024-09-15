@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   maincontainer: {
     flex: 1,
     backgroundColor: currentTheme.backgroundColor,
+    padding: 16,
   },
   wrappercontainer: {
     marginHorizontal: 15,
@@ -15,13 +16,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: "900",
     color: "orange",
     marginBottom: 10,
   },
   subtitle: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: "800",
     color: "orange",
     marginVertical: 10,
   },
@@ -32,16 +33,16 @@ const styles = StyleSheet.create({
   addButton: {
     position: "absolute",
     bottom: 20,
-    left: 20,
+    right: 20,
     backgroundColor: "orange",
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 16,
     zIndex: 1, // Ensure the button is on top of other content
   },
   addButtonText: {
     color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontWeight: "900",
   },
 });
 

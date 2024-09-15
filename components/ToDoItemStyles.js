@@ -5,21 +5,30 @@ const currentTheme = Theme.dark;
 
 const styles = StyleSheet.create({
   taskContainer: {
-    padding: 10,
+    padding: 12,
     backgroundColor: currentTheme.backgroundColor,
     borderWidth: 1,
-    borderColor: currentTheme.textColor, //temp
+    // borderColor: currentTheme.textColor, //temp
+    borderColor: "orange",
     flexDirection: "row",
+    borderRadius: 16,
+    marginBottom: 8,
   },
   checkbox: {
-    width: 35,
-    backgroundColor: "green",
+    width: 24,
+    height: 24,
+    borderColor: "#d0d0d0",
+    borderWidth: 2,
+    backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 16,
+    marginTop: 4,
   },
   checkboxText: {
-    color: "white",
-    fontSize: 18,
+    color: "#d0d0d0",
+    lineHeight: 17,
+    fontSize: 14,
   },
   taskContent: {
     flex: 1,
@@ -28,6 +37,7 @@ const styles = StyleSheet.create({
   taskTitle: {
     color: currentTheme.textColor,
     fontSize: 18,
+    fontWeight: "500",
   },
   taskDesc: {
     fontSize: 14,
@@ -35,10 +45,10 @@ const styles = StyleSheet.create({
   },
   dateDue: {
     color: currentTheme.textColor,
-    fontSize: 14,
+    fontSize: 10,
   },
   completed: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "transparent",
     borderColor: "#d0d0d0",
   },
   completedText: {
