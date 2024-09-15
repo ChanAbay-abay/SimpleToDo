@@ -8,13 +8,14 @@ const NewTask = ({ onSave }) => {
   const [due, setDue] = useState("");
 
   const handleSave = () => {
-    if (title && desc && due) {
-      const newTask = { title, desc, due };
-      onSave(newTask);
-      setTitle("");
-      setDesc("");
-      setDue("");
+    const newTask = { title, desc, due }; // Create task object with potentially empty fields
+    if (onSave) {
+      onSave(newTask); // Pass new task to App.js
     }
+    // Clear the fields after saving
+    setTitle("");
+    setDesc("");
+    setDue("");
   };
 
   return (
@@ -42,7 +43,10 @@ const NewTask = ({ onSave }) => {
           onChangeText={setDue}
         />
       </View>
-      <TouchableOpacity style={styles.checkbox} onPress={handleSave}>
+      <TouchableOpacity
+        style={styles.checkbox} // Keep the style as it was
+        onPress={handleSave}
+      >
         <Text style={styles.checkboxText}>Add Task</Text>
       </TouchableOpacity>
     </View>
