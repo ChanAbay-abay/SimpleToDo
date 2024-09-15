@@ -14,7 +14,7 @@ const ToDoItem = ({
   return (
     <TouchableOpacity
       style={[styles.taskContainer, completed && styles.completed]}
-      onPress={() => onEdit && onEdit(id)} // Ensure onEdit is defined before calling
+      onPress={() => onEdit && onEdit(id)}
     >
       <TouchableOpacity
         style={styles.checkbox}
