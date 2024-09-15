@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import styles from "./AppStyles";
-import ToDoItem from "./components/ToDoItem";
-import TaskModal from "./components/TaskModal";
+import ToDoItem from "./components/toDoItem";
+import NewTask from "./components/newTask";
+import EditTask from "./components/editTask";
 
 const initialToDoData = [
   {
