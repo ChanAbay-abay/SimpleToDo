@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import styles from "./toDoItemStyles";
 
 const ToDoItem = ({
@@ -12,17 +12,19 @@ const ToDoItem = ({
   onEdit,
 }) => {
   return (
-    <TouchableOpacity
-      style={[styles.taskContainer, completed && styles.completed]}
-      onPress={() => onEdit && onEdit(id)}
-    >
+    <View style={[styles.taskContainer, completed && styles.completed]}>
       <TouchableOpacity
-        style={styles.checkbox}
+        style={styles.checkboxContainer}
         onPress={() => onToggleComplete(id)}
       >
-        <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
+        <View style={styles.checkbox}>
+          <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
+        </View>
       </TouchableOpacity>
-      <View style={styles.taskContent}>
+      <TouchableOpacity
+        style={styles.taskContent}
+        onPress={() => onEdit && onEdit(id)}
+      >
         <Text
           style={[styles.taskTitle, completed && styles.completedTaskTitle]}
         >
@@ -35,13 +37,13 @@ const ToDoItem = ({
             {desc}
           </Text>
         ) : null}
-        {due ? ( // Render the date only if it exists
+        {due ? (
           <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
             {due}
           </Text>
         ) : null}
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
