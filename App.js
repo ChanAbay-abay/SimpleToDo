@@ -47,7 +47,8 @@ export default function App() {
   const [showNewTask, setShowNewTask] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
-  const [isSelecting, setIsSelecting] = useState(false);
+  const [selectMode, setSelectMode] = useState(false);
+  const [selectedTasks, setSelectedTasks] = useState([]);
 
   const toggleComplete = (id) => {
     setToDoData((prevData) =>
@@ -84,6 +85,31 @@ export default function App() {
     setShowNewTask(false);
   };
 
+  const toggleTaskSelection = (id) => {
+    setSelectedTasks((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((taskId) => taskId !== id)
+        : [...prevSelected, id]
+    );
+  };
+
+  const handleSelectMode = () => {
+    setSelectMode(!selectMode);
+    if (selectMode) {
+      setSelectedTasks([]);
+    }
+  };
+
+  const handleSelectAll = () => {
+    setSelectedTasks(toDoData.map((task) => task.id));
+  };
+
+  const handleDeleteSelected = () => {
+    setToDoData((prevData) => prevData.filter((task) => !selectedTasks.includes(task.id)));
+    setSelectedTasks([]);
+    setSelectMode(false);
+  };
+
   // Split tasks into incomplete and completed
   const incompleteTasks = toDoData.filter((task) => !task.completed);
   const completedTasks = toDoData.filter((task) => task.completed);
@@ -109,71 +135,89 @@ export default function App() {
     });
   }
 
-  return (
-    <SafeAreaView style={styles.maincontainer}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.wrappercontainer}>
-            <Text style={styles.title}>Simple To Do</Text>
-            <FlatList
-              data={displayedTasks}
-              renderItem={({ item }) => {
-                if (item.id === "new-task") {
-                  return (
-                    <NewTask
-                      onSave={addNewTask}
-                      onCancel={handleNewTaskCancel}
-                    />
-                  );
-                }
-                if (item.id === editingTaskId) {
-                  return (
-                    <EditTask
-                      task={item}
-                      onSave={editTask}
-                      onCancel={() => setEditingTaskId(null)}
-                      onDelete={deleteTask}
-                    />
-                  );
-                }
+return (
+  <SafeAreaView style={styles.maincontainer}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
+        <View style={styles.wrappercontainer}>
+          <Text style={styles.title}>Simple To Do</Text>
+
+          {/* select or done button */}
+          <TouchableOpacity
+              style={styles.selectButton}
+              onPress={handleSelectMode}
+            >
+              <Text style={styles.selectButtonText}>
+                {selectMode ? "Done" : "Select"}
+              </Text>
+          </TouchableOpacity>
+
+          <FlatList
+            data={displayedTasks}
+            renderItem={({ item }) => {
+              {/*render NewTask if the item represents a new task*/}
+              if (item.id === "new-task") {
                 return (
-                  <ToDoItem
-                    id={item.id}
-                    title={item.title}
-                    desc={item.desc}
-                    due={item.due}
-                    completed={item.completed}
-                    onToggleComplete={toggleComplete}
-                    onEdit={() => setEditingTaskId(item.id)}
+                  <NewTask
+                    onSave={addNewTask}
+                    onCancel={handleNewTaskCancel}
                   />
                 );
-              }}
-              keyExtractor={(item) => item.id}
-            />
-
-            <ActionButtons
-              showCompletedTasks={showCompletedTasks}
-              showNewTask={showNewTask}
-              onToggleCompletedTasks={() =>
-                setShowCompletedTasks(!showCompletedTasks)
               }
-              onToggleNewTask={() => setShowNewTask(!showNewTask)}
-              solidBackground={displayedTasks.length >= 8} // if 8 then solid
-            />
 
-            <TouchableOpacity
-              style={styles.selectButton}
-              onPress={() => setIsSelecting(!isSelecting)}
-            >
-              <Text style={styles.selectButtonText}>Select</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-      <StatusBar style="light" />
-    </SafeAreaView>
-  );
+              {/*render EditTask inline if the item is being edited*/}
+              if (item.id === editingTaskId) {
+                return (
+                  <EditTask
+                    task={item}
+                    onSave={editTask}
+                    onCancel={() => setEditingTaskId(null)}
+                    onDelete={() => deleteTask(item.id)}  // Pass in the specific task ID for deletion
+                  />
+                );
+              }
+
+              {/*render the task in view mode*/}
+              const isSelected = selectedTasks.includes(item.id); // Check if the task is selected
+              return (
+                <ToDoItem
+                  id={item.id}
+                  title={item.title}
+                  desc={item.desc}
+                  due={item.due}
+                  completed={item.completed}
+                  onToggleComplete={toggleComplete}
+                  onEdit={() => setEditingTaskId(item.id)}
+                  onSelect={() => toggleTaskSelection(item.id)}
+                  isSelected={isSelected}
+                  selectMode={selectMode}
+                />
+              );
+            }}
+            keyExtractor={(item) => item.id}
+          />
+
+          {/* action buttons: show finished or select alll */}
+          <ActionButtons
+            showCompletedTasks={showCompletedTasks}
+            showNewTask={showNewTask}
+            onToggleCompletedTasks={() => setShowCompletedTasks(!showCompletedTasks)}
+            onToggleNewTask={() => setShowNewTask(!showNewTask)}
+            solidBackground={displayedTasks.length >= 8}
+            onSelectMode={handleSelectMode}
+            onSelectAll={handleSelectAll}
+            onDeleteSelected={handleDeleteSelected}
+            selectMode={selectMode}
+          />
+        </View>
+
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+    <StatusBar style="light" />
+  </SafeAreaView>
+);
 }
