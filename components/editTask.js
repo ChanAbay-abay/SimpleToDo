@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, TextInput, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Import icons
+import { Ionicons } from "@expo/vector-icons";
 import styles from "./toDoItemStyles";
 
 const EditTask = ({ task, onSave, onCancel, onDelete }) => {
@@ -48,17 +48,15 @@ const EditTask = ({ task, onSave, onCancel, onDelete }) => {
           onChangeText={setDue}
         />
       </View>
-      {/* Save button */}
+
       <TouchableOpacity style={styles.actionButton} onPress={handleSave}>
         <Ionicons name="checkmark-circle" size={28} color="green" />
       </TouchableOpacity>
 
-      {/* Cancel button */}
       <TouchableOpacity style={styles.actionButton} onPress={onCancel}>
         <Ionicons name="close-circle" size={28} color="red" />
       </TouchableOpacity>
 
-      {/* Delete button */}
       <TouchableOpacity
         style={styles.actionButton}
         onPress={() => onDelete(task.id)}

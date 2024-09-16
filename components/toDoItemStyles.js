@@ -70,6 +70,12 @@ const styles = StyleSheet.create({
     textDecorationLine: "line-through",
     color: "#a0a0a0",
   },
+  selectedCheckbox: {
+    backgroundColor: 'red', // Highlight selected checkboxes
+  },
+  selected: {
+    backgroundColor: '#333', // Style for selected items
+  },
 });
 
 export default styles;
