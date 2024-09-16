@@ -6,7 +6,7 @@ const ToDoItem = ({
   id,
   title,
   desc,
-  due, // Due date (optional)
+  due,
   completed,
   onToggleComplete,
   onEdit,
