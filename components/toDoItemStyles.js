@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: currentTheme.backgroundColor,
     // borderWidth: 1,
     borderBottomWidth: 0.5,
-    borderColor: "white",
+    borderColor: "#696773",
     flexDirection: "row",
     borderRadius: 16,
     marginBottom: 8,

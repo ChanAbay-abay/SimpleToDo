@@ -14,8 +14,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "900",
     color: "#fff",
-    textAlign: "center",
+    textAlign: "left",
     marginBottom: 10,
+    marginLeft: 8,
   },
   subtitle: {
     fontSize: 18,
@@ -29,9 +30,9 @@ const styles = StyleSheet.create({
     width: 60,
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    bottom: 30,
-    right: 30,
+    // position: "absolute",
+    bottom: 1,
+    right: 1.5,
   },
   addButtonText: {
     color: "#fff",
@@ -45,14 +46,44 @@ const styles = StyleSheet.create({
     width: 164,
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    bottom: 30,
-    left: 30,
+    // position: "absolute",
+    bottom: 1,
+    left: 1.5,
   },
   showCompButtonText: {
     color: "#fff",
-    fontSize: 16, // Adjust font size as needed
+    fontSize: 16,
     fontWeight: "600",
+  },
+  selectButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    // backgroundColor: 'transparent',
+    padding: 10,
+    borderRadius: 5,
+    zIndex: 1000,
+  },
+  selectButtonText: {
+    color: '#1e90ff',
+    fontSize: 16,
+    marginTop: 12,
+    paddingRight: 8,
+  },
+  actionButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 90,
+  },
+  solidBackgroundContainer: {
+    backgroundColor: '#181818', // Solid background for container
+    padding: 15,
+    borderRadius: 16,
+  },
+  transparentContainer: {
+    backgroundColor: 'transparent', // Transparent background for container
+    padding: 15,
   },
 });
 
