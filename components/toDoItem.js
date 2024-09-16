@@ -28,12 +28,14 @@ const ToDoItem = ({
         >
           {title}
         </Text>
-        <Text style={[styles.taskDesc, completed && styles.completedTaskDesc]}>
-          {desc}
-        </Text>
-        <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
+        {desc ? ( //if field not empty then display
+          <Text style={[styles.taskDesc, completed && styles.completedText]}>
+            {desc}
+          </Text>
+        ) : null}
+        {/* <Text style={[styles.dateDue, completed && styles.completedText]}>
           Due: {due}
-        </Text>
+        </Text> */}
       </View>
     </TouchableOpacity>
   );

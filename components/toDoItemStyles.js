@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
   taskContainer: {
     padding: 12,
     backgroundColor: currentTheme.backgroundColor,
-    borderWidth: 1,
+    // borderWidth: 1,
+    borderBottomWidth: 0.5,
     borderColor: "white",
     flexDirection: "row",
     borderRadius: 16,
