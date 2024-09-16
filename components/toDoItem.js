@@ -10,40 +10,51 @@ const ToDoItem = ({
   completed,
   onToggleComplete,
   onEdit,
+  onSelect,
+  isSelected,
+  selectMode
 }) => {
   return (
-    <View style={[styles.taskContainer, completed && styles.completed]}>
-      <TouchableOpacity
-        style={styles.checkboxContainer}
-        onPress={() => onToggleComplete(id)}
-      >
-        <View style={styles.checkbox}>
-          <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.taskContent}
-        onPress={() => onEdit && onEdit(id)}
-      >
-        <Text
-          style={[styles.taskTitle, completed && styles.completedTaskTitle]}
+    <TouchableOpacity
+      style={[styles.taskContainer, completed && styles.completed]}
+      onPress={() => selectMode ? onSelect(id) : onEdit && onEdit(id)}
+    >
+      {selectMode && (
+        <TouchableOpacity
+          style={[
+            styles.checkbox,
+            isSelected && { borderColor: 'red' } // Red border for selected
+          ]}
         >
+          <Text style={[styles.checkboxText, isSelected && { color: 'red' }]}>
+            {isSelected ? "✔" : ""}
+          </Text>
+        </TouchableOpacity>
+      )}
+      {!selectMode && (
+        <TouchableOpacity
+          style={styles.checkbox}
+          onPress={() => onToggleComplete(id)}
+        >
+          <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
+        </TouchableOpacity>
+      )}
+      <View style={styles.taskContent}>
+        <Text style={[styles.taskTitle, completed && styles.completedTaskTitle]}>
           {title}
         </Text>
-        {desc ? (
-          <Text
-            style={[styles.taskDesc, completed && styles.completedTaskDesc]}
-          >
+        {desc && (
+          <Text style={[styles.taskDesc, completed && styles.completedTaskDesc]}>
             {desc}
           </Text>
-        ) : null}
-        {due ? (
+        )}
+        {desc && (
           <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
             {due}
           </Text>
-        ) : null}
-      </TouchableOpacity>
-    </View>
+        )}
+      </View>
+    </TouchableOpacity>
   );
 };
 

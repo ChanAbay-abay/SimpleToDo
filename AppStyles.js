@@ -57,12 +57,11 @@ const styles = StyleSheet.create({
   },
   selectButton: {
     position: 'absolute',
-    top: 10,
-    right: 10,
-    // backgroundColor: 'transparent',
+    top: 10,    // Distance from the top of the container
+    right: 10,  // Distance from the right of the container
     padding: 10,
     borderRadius: 5,
-    zIndex: 1000,
+    zIndex: 1000,  // Ensures it appears above other elements
   },
   selectButtonText: {
     color: '#1e90ff',
@@ -74,7 +73,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: 90,
+    padding: 10,
+    position: 'relative',  // This ensures the selectButton is positioned relative to this container
   },
   solidBackgroundContainer: {
     backgroundColor: '#181818', // Solid background for container
