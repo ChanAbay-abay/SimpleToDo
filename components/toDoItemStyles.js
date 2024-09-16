@@ -56,9 +56,17 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderColor: "#d0d0d0",
   },
-  completedText: {
-    color: "#a0a0a0",
+  completedTaskTitle: {
     textDecorationLine: "line-through",
+    color: "#a0a0a0",
+  },
+  completedTaskDesc: {
+    textDecorationLine: "line-through",
+    color: "#a0a0a0",
+  },
+  completedDateDue: {
+    textDecorationLine: "line-through",
+    color: "#a0a0a0",
   },
 });
 

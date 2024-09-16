@@ -23,9 +23,7 @@ const ToDoItem = ({
         <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
       </TouchableOpacity>
       <View style={styles.taskContent}>
-        <Text
-          style={[styles.taskTitle, completed && styles.completedTaskTitle]}
-        >
+        <Text style={[styles.taskTitle, completed && styles.completedText]}>
           {title}
         </Text>
         {desc ? ( //if field not empty then display

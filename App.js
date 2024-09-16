@@ -72,9 +72,15 @@ export default function App() {
     setEditingTaskId(null);
   };
 
+  const handleNewTaskCancel = () => {
+    setShowNewTask(false);
+  };
+
+  // Split tasks into incomplete and completed
   const incompleteTasks = toDoData.filter((task) => !task.completed);
   const completedTasks = toDoData.filter((task) => task.completed);
 
+  // Sort both lists by ID
   const sortedIncompleteTasks = incompleteTasks.sort((a, b) =>
     a.id.localeCompare(b.id)
   );
@@ -82,7 +88,7 @@ export default function App() {
     a.id.localeCompare(b.id)
   );
 
-  const displayedTasks = [...sortedIncompleteTasks];
+  const displayedTasks = [...sortedIncompleteTasks, ...sortedCompletedTasks];
   if (showNewTask) {
     displayedTasks.push({
       id: "new-task",
@@ -96,12 +102,13 @@ export default function App() {
     <SafeAreaView style={styles.maincontainer}>
       <View style={styles.wrappercontainer}>
         <Text style={styles.title}>Simple To Do</Text>
-        <Text style={styles.subtitle}>Incomplete Tasks</Text>
         <FlatList
           data={displayedTasks}
           renderItem={({ item }) => {
             if (item.id === "new-task") {
-              return <NewTask onSave={addNewTask} />;
+              return (
+                <NewTask onSave={addNewTask} onCancel={handleNewTaskCancel} />
+              );
             }
             if (item.id === editingTaskId) {
               return (
@@ -125,22 +132,6 @@ export default function App() {
               />
             );
           }}
-          keyExtractor={(item) => item.id}
-        />
-
-        <Text style={styles.subtitle}>Completed Tasks</Text>
-        <FlatList
-          data={sortedCompletedTasks}
-          renderItem={({ item }) => (
-            <ToDoItem
-              id={item.id}
-              title={item.title}
-              desc={item.desc}
-              due={item.due}
-              completed={item.completed}
-              onToggleComplete={toggleComplete}
-            />
-          )}
           keyExtractor={(item) => item.id}
         />
       </View>

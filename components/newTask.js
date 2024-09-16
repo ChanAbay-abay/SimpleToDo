@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons"; // Import icons
 import styles from "./toDoItemStyles";
 
-const NewTask = ({ onSave }) => {
+const NewTask = ({ onSave, onCancel }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [due, setDue] = useState("");
@@ -17,6 +18,15 @@ const NewTask = ({ onSave }) => {
       setTitle("");
       setDesc("");
       setDue("");
+    }
+  };
+
+  const handleCancel = () => {
+    setTitle("");
+    setDesc("");
+    setDue("");
+    if (onCancel) {
+      onCancel();
     }
   };
 
@@ -45,19 +55,11 @@ const NewTask = ({ onSave }) => {
           onChangeText={setDue}
         />
       </View>
-      <TouchableOpacity
-        style={styles.checkbox}
-        onPress={handleSave}
-        disabled={!title && !desc && !due}
-      >
-        <Text
-          style={[
-            styles.checkboxText,
-            { color: !title && !desc && !due ? "#a0a0a0" : "white" },
-          ]}
-        >
-          Add Task
-        </Text>
+      <TouchableOpacity style={styles.actionButton} onPress={handleSave}>
+        <Ionicons name="checkmark-circle" size={28} color="green" />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.actionButton} onPress={handleCancel}>
+        <Ionicons name="close-circle" size={28} color="red" />
       </TouchableOpacity>
     </View>
   );
