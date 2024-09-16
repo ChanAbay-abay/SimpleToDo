@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./toDoItemStyles";
 
 const ToDoItem = ({
   id,
   title,
   desc,
-  due, // Due date (optional)
+  due,
   completed,
   onToggleComplete,
   onEdit,
@@ -16,45 +16,45 @@ const ToDoItem = ({
 }) => {
   return (
     <TouchableOpacity
-      style={[styles.taskContainer, completed && styles.completed]}
-      onPress={() => selectMode ? onSelect(id) : onEdit && onEdit(id)}
+  style={[styles.taskContainer, completed && styles.completed]}
+  onPress={() => selectMode ? onSelect(id) : onEdit && onEdit(id)}
+>
+  {selectMode ? (
+    <TouchableOpacity
+      style={[
+        styles.checkbox,
+        isSelected && { borderColor: 'red' } // Red border for selected
+      ]}
     >
-      {selectMode && (
-        <TouchableOpacity
-          style={[
-            styles.checkbox,
-            isSelected && { borderColor: 'red' } // Red border for selected
-          ]}
-        >
-          <Text style={[styles.checkboxText, isSelected && { color: 'red' }]}>
-            {isSelected ? "✔" : ""}
-          </Text>
-        </TouchableOpacity>
-      )}
-      {!selectMode && (
-        <TouchableOpacity
-          style={styles.checkbox}
-          onPress={() => onToggleComplete(id)}
-        >
-          <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
-        </TouchableOpacity>
-      )}
-      <View style={styles.taskContent}>
-        <Text style={[styles.taskTitle, completed && styles.completedTaskTitle]}>
-          {title}
-        </Text>
-        {desc && (
-          <Text style={[styles.taskDesc, completed && styles.completedTaskDesc]}>
-            {desc}
-          </Text>
-        )}
-        {desc && (
-          <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
-            {due}
-          </Text>
-        )}
-      </View>
+      <Text style={[styles.checkboxText, isSelected && { color: 'red' }]}>
+        {isSelected ? "✔" : ""}
+      </Text>
     </TouchableOpacity>
+  ) : (
+    <TouchableOpacity
+      style={styles.checkbox}
+      onPress={() => onToggleComplete(id)}
+    >
+      <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
+    </TouchableOpacity>
+  )}
+
+  <View style={styles.taskContent}>
+    <Text style={[styles.taskTitle, completed && styles.completedTaskTitle]}>
+      {title}
+    </Text>
+    {desc ? (
+      <Text style={[styles.taskDesc, completed && styles.completedTaskDesc]}>
+        {desc}
+      </Text>
+    ) : null}
+    {due ? ( // Render the date only if it exists
+      <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
+        {due}
+      </Text>
+    ) : null}
+  </View>
+</TouchableOpacity>
   );
 };
 

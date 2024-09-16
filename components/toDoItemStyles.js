@@ -5,18 +5,14 @@ const currentTheme = Theme.dark;
 
 const styles = StyleSheet.create({
   taskContainer: {
-    flexDirection: "row",
     padding: 10,
     backgroundColor: currentTheme.backgroundColor,
+    // borderWidth: 1,
     borderBottomWidth: 0.5,
     borderColor: "#696773",
+    flexDirection: "row",
     borderRadius: 16,
-    alignItems: "center",
-  },
-  checkboxContainer: {
-    width: 50, // Adjust width as needed
-    height: 50,
-    justifyContent: "center",
+    // marginBottom: 8,
     alignItems: "center",
   },
   checkbox: {
@@ -27,15 +23,16 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 12,
+    borderRadius: 16,
   },
   checkboxText: {
     color: "#d0d0d0",
+    lineHeight: 17,
     fontSize: 14,
   },
   taskContent: {
     flex: 1,
-    marginLeft: 3,
+    marginLeft: 15,
   },
   taskTitle: {
     color: currentTheme.textColor,
@@ -53,6 +50,9 @@ const styles = StyleSheet.create({
     color: currentTheme.textColor,
     fontSize: 12,
     marginTop: 3,
+  },
+  actionButton: {
+    marginLeft: 10,
   },
   completed: {
     backgroundColor: "transparent",
