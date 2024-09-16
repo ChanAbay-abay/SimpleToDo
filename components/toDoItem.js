@@ -23,17 +23,19 @@ const ToDoItem = ({
         <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
       </TouchableOpacity>
       <View style={styles.taskContent}>
-        <Text style={[styles.taskTitle, completed && styles.completedText]}>
+        <Text style={[styles.taskTitle, completed && styles.completedTaskTitle]}>
           {title}
         </Text>
-        {desc ? ( //if field not empty then display
-          <Text style={[styles.taskDesc, completed && styles.completedText]}>
+        {desc ? (
+          <Text style={[styles.taskDesc, completed && styles.completedTaskDesc]}>
             {desc}
           </Text>
         ) : null}
-        {/* <Text style={[styles.dateDue, completed && styles.completedText]}>
-          Due: {due}
-        </Text> */}
+        {desc ? (
+          <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
+            {due}
+          </Text>
+        ) : null}
       </View>
     </TouchableOpacity>
   );

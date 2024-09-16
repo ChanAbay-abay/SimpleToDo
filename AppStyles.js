@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: "900",
     color: "#fff",
     textAlign: "center",
     marginBottom: 10,
@@ -36,6 +36,23 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: "#fff",
     fontSize: 24,
+    fontWeight: "600",
+  },
+  showCompButton: {
+    backgroundColor: "#525252",
+    borderRadius: 32,
+    height: 60,
+    width: 164,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    bottom: 30,
+    left: 30,
+  },
+  showCompButtonText: {
+    color: "#fff",
+    fontSize: 16, // Adjust font size as needed
+    fontWeight: "600",
   },
 });
 
