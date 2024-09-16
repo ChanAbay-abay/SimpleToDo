@@ -12,6 +12,7 @@ This is a React Native To-Do List application that allows users to manage tasks 
 - **Delete Tasks**: Remove tasks from the list.
 - **Mark Tasks as Complete**: Toggle the completion status of tasks.
 - **View Completed/Incomplete Tasks**: Switch between viewing incomplete and completed tasks.
+- **Select Tasks**: Select a single or multiple tasks to delete.
 - **Responsive Design**: The app adjusts to different screen sizes and orientations.
 
 ## Components
