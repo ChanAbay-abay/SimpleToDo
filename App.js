@@ -40,6 +40,7 @@ export default function App() {
   const [toDoData, setToDoData] = useState(initialToDoData);
   const [showNewTask, setShowNewTask] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState(null);
+  const [showCompletedTasks, setShowCompletedTasks] = useState(false);
 
   const toggleComplete = (id) => {
     setToDoData((prevData) =>
@@ -88,7 +89,10 @@ export default function App() {
     a.id.localeCompare(b.id)
   );
 
-  const displayedTasks = [...sortedIncompleteTasks, ...sortedCompletedTasks];
+  const displayedTasks = showCompletedTasks
+    ? [...sortedIncompleteTasks, ...sortedCompletedTasks]
+    : sortedIncompleteTasks;
+  
   if (showNewTask) {
     displayedTasks.push({
       id: "new-task",
@@ -134,7 +138,17 @@ export default function App() {
           }}
           keyExtractor={(item) => item.id}
         />
+
       </View>
+
+      <TouchableOpacity
+        style={styles.showCompButton}
+        onPress={() => setShowCompletedTasks(!showCompletedTasks)}
+      >
+        <Text style={styles.showCompButtonText}>
+          {showCompletedTasks ? "Hide Finished" : "Show Finished"}
+        </Text>
+      </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.addButton}
