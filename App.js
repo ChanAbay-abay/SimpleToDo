@@ -6,11 +6,17 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
+
 import styles from "./AppStyles";
 import ToDoItem from "./components/toDoItem";
 import NewTask from "./components/newTask";
 import EditTask from "./components/editTask";
+import ActionButtons from "./components/actionButton";
 
 const initialToDoData = [
   {
@@ -41,6 +47,7 @@ export default function App() {
   const [showNewTask, setShowNewTask] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
+  const [isSelecting, setIsSelecting] = useState(false);
 
   const toggleComplete = (id) => {
     setToDoData((prevData) =>
@@ -104,59 +111,65 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.maincontainer}>
-      <View style={styles.wrappercontainer}>
-        <Text style={styles.title}>Simple To Do</Text>
-        <FlatList
-          data={displayedTasks}
-          renderItem={({ item }) => {
-            if (item.id === "new-task") {
-              return (
-                <NewTask onSave={addNewTask} onCancel={handleNewTaskCancel} />
-              );
-            }
-            if (item.id === editingTaskId) {
-              return (
-                <EditTask
-                  task={item}
-                  onSave={editTask}
-                  onCancel={() => setEditingTaskId(null)}
-                  onDelete={deleteTask}
-                />
-              );
-            }
-            return (
-              <ToDoItem
-                id={item.id}
-                title={item.title}
-                desc={item.desc}
-                due={item.due}
-                completed={item.completed}
-                onToggleComplete={toggleComplete}
-                onEdit={() => setEditingTaskId(item.id)}
-              />
-            );
-          }}
-          keyExtractor={(item) => item.id}
-        />
-
-      </View>
-
-      <TouchableOpacity
-        style={styles.showCompButton}
-        onPress={() => setShowCompletedTasks(!showCompletedTasks)}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
       >
-        <Text style={styles.showCompButtonText}>
-          {showCompletedTasks ? "Hide Finished" : "Show Finished"}
-        </Text>
-      </TouchableOpacity>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => setShowNewTask(!showNewTask)}
-      >
-        <Text style={styles.addButtonText}>+</Text>
-      </TouchableOpacity>
+          <View style={styles.wrappercontainer}>
+            <Text style={styles.title}>Simple To Do</Text>
+            <FlatList
+              data={displayedTasks}
+              renderItem={({ item }) => {
+                if (item.id === "new-task") {
+                  return (
+                    <NewTask onSave={addNewTask} onCancel={handleNewTaskCancel} />
+                  );
+                }
+                if (item.id === editingTaskId) {
+                  return (
+                    <EditTask
+                      task={item}
+                      onSave={editTask}
+                      onCancel={() => setEditingTaskId(null)}
+                      onDelete={deleteTask}
+                    />
+                  );
+                }
+                return (
+                  <ToDoItem
+                    id={item.id}
+                    title={item.title}
+                    desc={item.desc}
+                    due={item.due}
+                    completed={item.completed}
+                    onToggleComplete={toggleComplete}
+                    onEdit={() => setEditingTaskId(item.id)}
+                  />
+                );
+              }}
+              keyExtractor={(item) => item.id}
+            />
 
+            <ActionButtons
+              showCompletedTasks={showCompletedTasks}
+              showNewTask={showNewTask}
+              onToggleCompletedTasks={() => setShowCompletedTasks(!showCompletedTasks)}
+              onToggleNewTask={() => setShowNewTask(!showNewTask)}
+              solidBackground={displayedTasks.length >= 8} // if 8 then solid
+            />
+
+            <TouchableOpacity
+              style={styles.selectButton}
+              onPress={() => setIsSelecting(!isSelecting)}
+            >
+              <Text style={styles.selectButtonText}>Select</Text>
+            </TouchableOpacity>
+          </View>
+
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
       <StatusBar style="light" />
     </SafeAreaView>
   );
