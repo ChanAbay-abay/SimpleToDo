@@ -99,7 +99,7 @@ export default function App() {
   const displayedTasks = showCompletedTasks
     ? [...sortedIncompleteTasks, ...sortedCompletedTasks]
     : sortedIncompleteTasks;
-  
+
   if (showNewTask) {
     displayedTasks.push({
       id: "new-task",
@@ -116,7 +116,6 @@ export default function App() {
         style={{ flex: 1 }}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-
           <View style={styles.wrappercontainer}>
             <Text style={styles.title}>Simple To Do</Text>
             <FlatList
@@ -124,7 +123,10 @@ export default function App() {
               renderItem={({ item }) => {
                 if (item.id === "new-task") {
                   return (
-                    <NewTask onSave={addNewTask} onCancel={handleNewTaskCancel} />
+                    <NewTask
+                      onSave={addNewTask}
+                      onCancel={handleNewTaskCancel}
+                    />
                   );
                 }
                 if (item.id === editingTaskId) {
@@ -155,7 +157,9 @@ export default function App() {
             <ActionButtons
               showCompletedTasks={showCompletedTasks}
               showNewTask={showNewTask}
-              onToggleCompletedTasks={() => setShowCompletedTasks(!showCompletedTasks)}
+              onToggleCompletedTasks={() =>
+                setShowCompletedTasks(!showCompletedTasks)
+              }
               onToggleNewTask={() => setShowNewTask(!showNewTask)}
               solidBackground={displayedTasks.length >= 8} // if 8 then solid
             />
@@ -167,7 +171,6 @@ export default function App() {
               <Text style={styles.selectButtonText}>Select</Text>
             </TouchableOpacity>
           </View>
-
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
       <StatusBar style="light" />

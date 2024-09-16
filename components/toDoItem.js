@@ -6,7 +6,7 @@ const ToDoItem = ({
   id,
   title,
   desc,
-  due,
+  due, // Due date (optional)
   completed,
   onToggleComplete,
   onEdit,
@@ -23,15 +23,19 @@ const ToDoItem = ({
         <Text style={styles.checkboxText}>{completed ? "✔" : ""}</Text>
       </TouchableOpacity>
       <View style={styles.taskContent}>
-        <Text style={[styles.taskTitle, completed && styles.completedTaskTitle]}>
+        <Text
+          style={[styles.taskTitle, completed && styles.completedTaskTitle]}
+        >
           {title}
         </Text>
         {desc ? (
-          <Text style={[styles.taskDesc, completed && styles.completedTaskDesc]}>
+          <Text
+            style={[styles.taskDesc, completed && styles.completedTaskDesc]}
+          >
             {desc}
           </Text>
         ) : null}
-        {desc ? (
+        {due ? ( // Render the date only if it exists
           <Text style={[styles.dateDue, completed && styles.completedDateDue]}>
             {due}
           </Text>

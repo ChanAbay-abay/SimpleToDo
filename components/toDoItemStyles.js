@@ -5,14 +5,14 @@ const currentTheme = Theme.dark;
 
 const styles = StyleSheet.create({
   taskContainer: {
-    padding: 12,
+    padding: 10,
     backgroundColor: currentTheme.backgroundColor,
     // borderWidth: 1,
     borderBottomWidth: 0.5,
     borderColor: "#696773",
     flexDirection: "row",
     borderRadius: 16,
-    marginBottom: 8,
+    // marginBottom: 8,
     alignItems: "center",
   },
   checkbox: {
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     flexWrap: "wrap",
+    marginBottom: 3,
   },
   taskDesc: {
     fontSize: 14,
@@ -47,7 +48,8 @@ const styles = StyleSheet.create({
   },
   dateDue: {
     color: currentTheme.textColor,
-    fontSize: 10,
+    fontSize: 12,
+    marginTop: 3,
   },
   actionButton: {
     marginLeft: 10,
