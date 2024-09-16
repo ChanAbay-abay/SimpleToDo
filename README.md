@@ -28,21 +28,17 @@ This is a React Native To-Do List application that allows users to manage tasks 
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/ChanAbay-abay/SimpleToDo.git
 
-2. **Navigate to the project directoy:
+2. **Navigate to the project directoy**:
    ```bash
-   cd <project-directory>
+   cd SimpleToDo
 
-2. **Navigate to the project directoy:
-   ```bash
-   cd <project-directory>
-
-3. **Install dependencies:
+3. **Install dependencies**:
    ```bash
    npm install
 
-4. **Run the application:
+4. **Run the application**:
    ```bash
    npx expo start
   
