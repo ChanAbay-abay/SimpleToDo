@@ -1,6 +1,11 @@
 # SimpleToDo
  A simple to-do list application made for both Android & IOS.
 
+ ## Drive Link
+```bash
+   https://drive.google.com/drive/folders/1ZqnadNEOF81JmzfXhE8587icCf6JekxY?usp=sharing
+```
+
 ## Overview
 
 This is a React Native To-Do List application that allows users to manage tasks with features such as adding, editing, deleting, and marking tasks as complete. The application supports a dynamic and interactive user interface with separate components for managing tasks and styling.
@@ -42,8 +47,4 @@ This is a React Native To-Do List application that allows users to manage tasks 
 4. **Run the application**:
    ```bash
    npx expo start
-
-## Drive Link
-```bash
-   https://drive.google.com/drive/folders/1ZqnadNEOF81JmzfXhE8587icCf6JekxY?usp=sharing
   
